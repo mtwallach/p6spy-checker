@@ -99,7 +99,6 @@ public class P6SpyChecker {
          			System.out.print(a.getTime() +"  : "+ a.getLine());
    			 }
 			*/
-			System.out.println("MTW 99: ArrayLenght is " + qList.size());
 			for (int x = 0; x < batchSize; x++) {
 				P6SpyRow a = qList.get(x);
 				System.out.println(a.getTime() +"  : "+ a.getLine());

@@ -9,18 +9,10 @@ Basically takes a p6spy output file (these can be extremely large and difficult 
 ## How to make it work
 There are just a couple of things in the code you need to change.
 
-```
-line 25
-String p6spyfile = ....
-```
-* change this to the actual path of the output file.
-
-
-```
-line 17
-private static int BATCH = ...
-```
-* how many longest queries do you want to find, i.e. of the longest queries identified, how far back do tou want to go?
+java -jar target/p6spy_stuff-0.0.1-SNAPSHOT-jar-with-dependencies.jar -l "./spy36.log" -b 11
+Options are –l & -b
+-l is the spy.log you want to analyze
+-b is the top number of long running operations you which to see. For example –b 10 will show 10 longest running operations
 
 ## Prerequisites
 * Eclipse
@@ -28,26 +20,17 @@ private static int BATCH = ...
 
 ## Output example:
 ```
-P6Spy checker
--------------
-4 of the longest query times:
-QueryTime (ms): 1648749
-QueryTime (ms): 838461
-QueryTime (ms): 706475
-QueryTime (ms): 658068
+3 of the longest query times:
+2 - Processing
+QueryTime (ms): 243
+2 - Processing
+QueryTime (ms): 209
+2 - Processing
+QueryTime (ms): 208
 --------------------------------
-Date/Time: 26/07/2017 22:46:28 | Query Time (ms): 1648749 | Connection ID: 999 | Category: statement
-Query: 
-            assoc.id                    as id,
-            parentNode.id               as parentNodeId,
-            .......
---------------------------------
-
-Date/Time: 26/07/2017 23:19:03 | Query Time (ms): 658068 | Connection ID: 998 | Category: statement
-Query: 
-            assoc.id                    as id,
-            parentNode.id               as parentNodeId,
-			....
+243  : 1521255600710|243|statement|connection 517|delete apr from alf_prop_root apr inner join temp_prop_root_obs tpra on apr.id = tpra.id and tpra.id >= 0 and tpra.id <= 9999|delete apr from alf_prop_root apr inner join temp_prop_root_obs tpra on apr.id = tpra.id and tpra.id >= 0 and tpra.id <= 9999
+209  : 1521340230216|209|statement|connection 1637|select             txn.id              as id,             txn.commit_time_ms  as commit_time_ms,             count(case when node.type_qname_id != ? then 1 end) as updates,             count(case when node.type_qname_id = ? then 1 end) as deletes         from             alf_transaction txn         join alf_node node on (txn.id = node.transaction_id)          WHERE  txn.id >= ?                                                    and txn.id < ?          group by txn.commit_time_ms, txn.id         order by txn.commit_time_ms ASC, txn.id ASC|select             txn.id              as id,             txn.commit_time_ms  as commit_time_ms,             count(case when node.type_qname_id != 149 then 1 end) as updates,             count(case when node.type_qname_id = 149 then 1 end) as deletes         from             alf_transaction txn         join alf_node node on (txn.id = node.transaction_id)          WHERE  txn.id >= 0                                                    and txn.id < 2000          group by txn.commit_time_ms, txn.id         order by txn.commit_time_ms ASC, txn.id ASC
+208  : 1521221280258|208|statement|connection 57|select           sequence_id as id,          activity_data as activityData,          activity_type as activityType,          post_user_id as userId,          post_date as postDate,          job_task_node as jobTaskNode,          site_network as siteNetwork,          app_tool as appTool,          status as status       from           alf_activity_post       where           status = ?|select           sequence_id as id,          activity_data as activityData,          activity_type as activityType,          post_user_id as userId,          post_date as postDate,          job_task_node as jobTaskNode,          site_network as siteNetwork,          app_tool as appTool,          status as status       from           alf_activity_post       where           status = 'PENDING'
 ```
 
 ## Note
