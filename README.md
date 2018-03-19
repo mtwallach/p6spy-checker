@@ -7,12 +7,14 @@ Basically takes a p6spy output file (these can be extremely large and difficult 
 - it then gets the actual queries being run for each long-running query and spits that out too.
 
 ## How to make it work
-There are just a couple of things in the code you need to change.
+* Build the jar
+ * mvn clean install package
 
-java \-jar target/p6spy_stuff-0.0.1-SNAPSHOT-jar-with-dependencies.jar \-l "./spy36.log" \-b 11
-* Options are l & b
-        * \-l is the spy.log you want to analyze
-        * \-b is the top number of long running operations you which to see.  (\–b 10 will show 10 longest running operations)
+* Run the jar
+  * java -jar "target/p6spy_stuff-0.0.1-SNAPSHOT-jar-with-dependencies.jar" -l ./spy36.log -b 11
+  * Options are -l & i-b
+     * -l is the spy.log you want to analyze
+     * -b is the top number of long running operations you which to see.  (–b 10 will show 10 longest running operations)
 
 ## Prerequisites
 * Eclipse
