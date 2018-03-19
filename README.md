@@ -10,9 +10,9 @@ Basically takes a p6spy output file (these can be extremely large and difficult 
 There are just a couple of things in the code you need to change.
 
 java -jar target/p6spy_stuff-0.0.1-SNAPSHOT-jar-with-dependencies.jar -l "./spy36.log" -b 11
-Options are –l & -b
--l is the spy.log you want to analyze
--b is the top number of long running operations you which to see. For example –b 10 will show 10 longest running operations
+*Options are –l & -b
+	* -l is the spy.log you want to analyze
+	* -b is the top number of long running operations you which to see. For example –b 10 will show 10 longest running operations
 
 ## Prerequisites
 * Eclipse
